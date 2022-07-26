@@ -1,10 +1,10 @@
 import React from 'react';
-import HelloWorld from '../pages/hello-world';
+import ExercisesPage from '../pages/exercises-page';
 
 export default function Home(props) {
   return (
     <div>
-      <HelloWorld />
+      <ExercisesPage />
     </div>
   );
 }

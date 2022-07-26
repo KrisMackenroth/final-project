@@ -1,7 +1,7 @@
 import React from 'react';
 import WorkoutList from '../components/workout-list';
 
-export default class HelloWorld extends React.Component {
+export default class ExercisesPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
