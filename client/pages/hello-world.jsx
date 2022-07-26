@@ -34,9 +34,9 @@ export default class HelloWorld extends React.Component {
     }
     return (
       <React.Fragment>
-        <h1 className='color-white text-center'>Exercises</h1>
+        <h1 className='color-white text-center mb-5 pt-4'>Exercises</h1>
         <div className="row">
-          <div className='col text-center d-flex justify-content-center'>
+          <div className='col text-center d-flex justify-content-center mb-5'>
           <label htmlFor="exampleFormControlInput1" className="form-label"></label>
           <input type="search" className="form-control d-inline search" id="exampleFormControlInput1"></input>
           <button type="button" className="btn btn-warning btn-sm background-color-yellow">Search</button>

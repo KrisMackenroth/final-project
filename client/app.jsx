@@ -28,7 +28,7 @@ export default class App extends React.Component {
       <React.Fragment>
         <nav className="navbar background-light-grey">
           <div className="container-fluid justify-content-center">
-            <span className="navbar-brand mb-0 h1 karla-medium-italic">MyWorkout</span>
+            <span className="navbar-brand mb-0 h1 karla-medium-italic fs-3">MyWorkout</span>
           </div>
         </nav>
         <div className='container-fluid background-dark-blue'>
