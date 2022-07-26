@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ObjectList(props) {
+function WorkoutList(props) {
   return (
     <div key={props.workoutId} className='row text-center test align-items-center'>
       <div className='col'>
@@ -16,4 +16,4 @@ function ObjectList(props) {
   );
 }
 
-export default ObjectList;
+export default WorkoutList;

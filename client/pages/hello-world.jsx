@@ -1,5 +1,5 @@
 import React from 'react';
-import ObjectList from '../components/object-list';
+import WorkoutList from '../components/workout-list';
 
 export default class HelloWorld extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class HelloWorld extends React.Component {
 
   render() {
     const listItems = this.state.todos.map(exercise =>
-      <ObjectList key={exercise.workoutId} muscleGroup={exercise.muscleGroup} name={exercise.name}/>
+      <WorkoutList key={exercise.workoutId} muscleGroup={exercise.muscleGroup} name={exercise.name}/>
     );
 
     let items;
