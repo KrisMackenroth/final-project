@@ -55,3 +55,12 @@ ul {
 .temp {
   width: 50%;
 }
+
+.height {
+  height: 100%;
+}
+
+.big {
+  font-size: 200%;
+  color: black;
+}
