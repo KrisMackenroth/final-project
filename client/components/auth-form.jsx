@@ -73,6 +73,18 @@ export default class AuthForm extends React.Component {
             className="form-control bg-light" />
         </div>
         <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+          </label>
+          <input
+            required
+            id="password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            placeholder="Password"
+            className="form-control bg-light" />
+        </div>
+        <div className="mb-3">
           <label htmlFor="email" className="form-label">
           </label>
           <input
@@ -83,18 +95,6 @@ export default class AuthForm extends React.Component {
             name="email"
             onChange={handleChange}
             placeholder="Email"
-            className="form-control bg-light" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-          </label>
-          <input
-            required
-            id="password"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            placeholder="Password"
             className="form-control bg-light" />
         </div>
         <div className="d-flex flex-column-reverse justify-content-between align-items-center">

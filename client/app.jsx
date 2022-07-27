@@ -3,6 +3,7 @@ import Home from './pages/home';
 import { parseRoute } from './lib';
 import Auth from './pages/auth';
 import AppContext from './lib/app-context';
+import jwtDecode from 'jwt-decode';
 
 export default class App extends React.Component {
 
@@ -10,13 +11,21 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   componentDidMount() {
-    addEventListener('hashchange', () => { this.setState({ route: parseRoute(window.location.hash) }); });
+    window.addEventListener('hashchange', () => {
+      this.setState({
+        route: parseRoute(window.location.hash)
+      });
+    });
+    const token = window.localStorage.getItem('react-context-jwt');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user, isAuthorizing: false });
   }
 
   handleSignIn(result) {
