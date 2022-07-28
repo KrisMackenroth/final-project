@@ -37,7 +37,7 @@ export default function TemporaryDrawer() {
         <div className='row'>
           <div className='col'>
         <button className='nav-buttons'>
-              <a href='' className='personal-info nav-buttons'>My Profile</a>
+              <a href='#personal-info' className='personal-info nav-buttons'>My Profile</a>
         </button>
           </div>
         </div>

@@ -94,3 +94,26 @@ ul {
 .background-white {
   background-color: white !important;
 }
+
+.macros {
+  background-color: white;
+  margin-left: 20%;
+  margin-right: 20%;
+  color: black;
+}
+
+.row-macro {
+  background-color: white;
+  margin: auto !important;
+  color: black;
+  border-radius: 50px;
+  width: 70%;
+}
+
+.macro-test {
+  width: 70%;
+  margin: auto;
+  background-color: blue;
+  border-radius: 50px;
+  color: black;
+}

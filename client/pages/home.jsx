@@ -3,7 +3,8 @@ import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
 import TemporaryDrawer from '../components/navbar';
-import PersonalInfo from './personal-info';
+// import PersonalInfo from './personal-info';
+import MacrosPage from './macros';
 
 export default class Home extends React.Component {
 
@@ -27,7 +28,7 @@ export default class Home extends React.Component {
         <div className='container-fluid background-dark-blue'>
       <div className='col'>
       <div>
-        <PersonalInfo />
+        <MacrosPage/>
       </div>
 
     </div>
