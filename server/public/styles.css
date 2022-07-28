@@ -42,6 +42,13 @@ ul {
   font-style: italic;
 }
 
+.inter-heavy {
+  font-family: Inter, sans-serif;
+  margin: 0;
+  font-weight: 900;
+  font-style: italic;
+}
+
 .test {
   border-bottom: solid rgba(255, 255, 255, 0.432);
   border-bottom-width: 0.1px;
@@ -63,4 +70,27 @@ ul {
 .big {
   font-size: 200%;
   color: black;
+}
+
+.nav-buttons {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  color: white;
+  text-decoration: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.color-black {
+  color: black;
+}
+
+.background-white {
+  background-color: white !important;
 }

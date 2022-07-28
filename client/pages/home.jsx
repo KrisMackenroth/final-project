@@ -1,8 +1,9 @@
 import React from 'react';
-import ExercisesPage from '../pages/exercises-page';
+// import ExercisesPage from '../pages/exercises-page';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
 import TemporaryDrawer from '../components/navbar';
+import PersonalInfo from './personal-info';
 
 export default class Home extends React.Component {
 
@@ -26,7 +27,7 @@ export default class Home extends React.Component {
         <div className='container-fluid background-dark-blue'>
       <div className='col'>
       <div>
-        <ExercisesPage />
+        <PersonalInfo />
       </div>
 
     </div>
