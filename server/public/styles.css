@@ -64,3 +64,22 @@ ul {
   font-size: 200%;
   color: black;
 }
+
+.nav-buttons {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  color: white;
+  text-decoration: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.color-black {
+  color: black;
+}

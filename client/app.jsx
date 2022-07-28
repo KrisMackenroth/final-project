@@ -4,6 +4,8 @@ import { parseRoute } from './lib';
 import Auth from './pages/auth';
 import AppContext from './lib/app-context';
 import jwtDecode from 'jwt-decode';
+import ExercisesPage from './pages/exercises-page';
+import PersonalInfo from './pages/personal-info';
 
 export default class App extends React.Component {
 
@@ -13,10 +15,12 @@ export default class App extends React.Component {
       user: null,
       isAuthorizing: true,
       route: parseRoute(window.location.hash),
-      isClicked: false
+      isClicked: false,
+      token: null
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +34,10 @@ export default class App extends React.Component {
     this.setState({ user, isAuthorizing: false });
   }
 
-  handleClick() {
+  handleClick(event) {
+    if (event.target.classList.contains('Sign-Out')) {
+      this.handleSignOut();
+    }
 
   }
 
@@ -38,6 +45,12 @@ export default class App extends React.Component {
     const { user, token } = result;
     window.localStorage.setItem('react-context-jwt', token);
     this.setState({ user });
+    this.setState({ token });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
@@ -48,20 +61,26 @@ export default class App extends React.Component {
     if (path === 'sign-in' || path === 'sign-up') {
       return <Auth />;
     }
+    if (path === 'exercises-page') {
+      return <ExercisesPage />;
+    }
+    if (path === 'personal-info') {
+      return <PersonalInfo />;
+    }
 
   }
 
   render() {
 
-    const { user, route } = this.state;
+    const { user, route, token } = this.state;
     const { handleSignIn, handleSignOut } = this;
-    const contextValue = { user, route, handleSignIn, handleSignOut };
+    const contextValue = { user, route, handleSignIn, handleSignOut, token };
 
     return (
       <AppContext.Provider value={contextValue}>
-
+<div onClick={this.handleClick}>
       { this.renderPage() }
-
+        </div>
       </AppContext.Provider>
     );
   }

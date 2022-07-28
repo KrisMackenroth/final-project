@@ -3,9 +3,6 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -37,13 +34,27 @@ export default function TemporaryDrawer() {
         </div>
       </nav>
       <List>
-        {['My Profile', 'Macros', 'Workouts', 'Sign Out'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <div className='row'>
+          <div className='col'>
+        <button className='nav-buttons'>
+              <a href='' className='personal-info nav-buttons'>My Profile</a>
+        </button>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col'>
+        <button className='nav-buttons'>
+              <a href='#exercises-page' className='exercises nav-buttons'>Exercises</a>
+        </button>
+        </div>
+      </div>
+        <div className='row'>
+          <div className='col'>
+        <button className='nav-buttons'>
+          <a href='#' className='Sign-Out nav-buttons'>Sign Out</a>
+        </button>
+          </div>
+        </div>
       </List>
     </Box>
   );
