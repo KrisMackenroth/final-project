@@ -131,8 +131,8 @@ export default class AuthForm extends React.Component {
                   <label className="input-group-text" htmlFor="inputGroupSelect01">Gender</label>
                   <select name='sex' onChange={handleChange} className="form-select" id="inputGroupSelect01">
                     <option defaultChecked>Choose...</option>
-                    <option value="male">Male</option>
-                    <option value="male">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </select>
                 </div>
               </div>

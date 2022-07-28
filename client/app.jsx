@@ -78,7 +78,7 @@ export default class App extends React.Component {
 
     return (
       <AppContext.Provider value={contextValue}>
-<div onClick={this.handleClick}>
+      <div onClick={this.handleClick}>
       { this.renderPage() }
         </div>
       </AppContext.Provider>
