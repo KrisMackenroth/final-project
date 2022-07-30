@@ -113,7 +113,23 @@ ul {
 .macro-test {
   width: 70%;
   margin: auto;
-  background-color: blue;
   border-radius: 50px;
   color: black;
+}
+
+@media (min-width: 992px) {
+  .chart {
+    margin: auto !important;
+    width: 30%;
+  }
+
+  .macros {
+    width: 30%;
+    margin: auto;
+  }
+
+  .row-macro {
+    width: 30% !important;
+    margin: auto;
+  }
 }

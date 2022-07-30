@@ -6,7 +6,8 @@ import AppContext from './lib/app-context';
 import jwtDecode from 'jwt-decode';
 import ExercisesPage from './pages/exercises-page';
 import PersonalInfo from './pages/personal-info';
-
+import MacrosPage from './pages/macros';
+import InfoEdit from './pages/Info-edit';
 export default class App extends React.Component {
 
   constructor(props) {
@@ -66,6 +67,12 @@ export default class App extends React.Component {
     }
     if (path === 'personal-info') {
       return <PersonalInfo />;
+    }
+    if (path === 'macros') {
+      return <MacrosPage />;
+    }
+    if (path === 'info-edit') {
+      return <InfoEdit />;
     }
 
   }

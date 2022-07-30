@@ -1,7 +1,8 @@
 import React from 'react';
-// import Chart from 'chart.js/auto';
+import Chart from 'chart.js/auto';
 
 import { Doughnut } from 'react-chartjs-2';
+Chart.register();
 
 export default class MacroForm extends React.Component {
   constructor(props) {
@@ -36,7 +37,6 @@ export default class MacroForm extends React.Component {
   }
 
   render() {
-
     const splity = this.state.birthday.split('-');
     const parsed = parseInt(splity[0]);
     const newDate = new Date();
@@ -80,7 +80,7 @@ export default class MacroForm extends React.Component {
     return (
       <React.Fragment>
         <div>
-          <div className='row'>
+          <div className='row chart'>
             <div className='col'>
               <Doughnut
                 data={state}
@@ -100,21 +100,21 @@ export default class MacroForm extends React.Component {
           </div>
         </div>
         <h1 className='color-white text-center'>Macros</h1>
-        <div className='row mb-4'>
+        <div className='row mb-4 row-macro'>
           <div className='col'>
-        <div className='color-white text-center macros rounded-pill'>BMR: {bmr} Calories</div>
+        <div className='text-center rounded-pill'>BMR: {bmr} Calories</div>
           </div>
         </div>
 
-        <div className='row mb-4'>
+        <div className='row mb-4 row-macro'>
           <div className='col color-white text-center macros rounded-pill'><span>Protein</span>: <span>{protein} Grams</span>
           </div>
         </div>
-        <div className='row mb-4'>
+        <div className='row mb-4 row-macro'>
           <div className='col color-white text-center macros rounded-pill'><span>Carbs</span>: <span>{carbs} Grams</span>
           </div>
         </div>
-        <div className='row mb-4'>
+        <div className='row mb-4 row-macro'>
           <div className='col color-white text-center macros rounded-pill'><span>Fats</span>: <span>{fat} Grams</span>
           </div>
         </div>

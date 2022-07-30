@@ -160,6 +160,29 @@ returning *;
     .catch(err => next(err));
 });
 
+app.delete('/api/info', (req, res, next) => {
+  const { userId } = req.user;
+  const sql = `
+    delete from "accountInfo"
+ where "userId" = $1
+returning *;
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const sql = `
+    delete from "users"
+ where "userId" = $1
+returning *;
+  `;
+      db.query(sql, params)
+        .then(result => {
+          res.status(201).json();
+        });
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

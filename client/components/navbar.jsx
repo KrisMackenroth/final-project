@@ -50,6 +50,13 @@ export default function TemporaryDrawer() {
       </div>
         <div className='row'>
           <div className='col'>
+            <button className='nav-buttons'>
+              <a href='#macros' className='exercises nav-buttons'>Macros</a>
+            </button>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col'>
         <button className='nav-buttons'>
           <a href='#' className='Sign-Out nav-buttons'>Sign Out</a>
         </button>
