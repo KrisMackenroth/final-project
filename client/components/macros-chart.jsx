@@ -100,9 +100,8 @@ export default class MacroForm extends React.Component {
           </div>
         </div>
         <h1 className='color-white text-center'>Macros</h1>
-        <div className='row mb-4 row-macro'>
-          <div className='col'>
-        <div className='text-center rounded-pill'>BMR: {bmr} Calories</div>
+        {/* <div className='row mb-4 row-macro'>
+          <div className='col color-white text-center macros rounded-pill'><span>BMR: </span>: <span>{bmr} Calories</span>
           </div>
         </div>
 
@@ -116,6 +115,30 @@ export default class MacroForm extends React.Component {
         </div>
         <div className='row mb-4 row-macro'>
           <div className='col color-white text-center macros rounded-pill'><span>Fats</span>: <span>{fat} Grams</span>
+          </div>
+        </div> */}
+        <div className='col color-black background-light-grey rounded macros'>
+          <div className='row mt-3 p-3 rounded'>
+            <div className='col inter-heavy'>BMR: </div>
+            <div className='col inter-heavy text-center rounded-pill'>{bmr} Calories</div>
+          </div>
+        </div>
+        <div className='col color-black background-light-grey rounded macros'>
+          <div className='row mt-3 p-3 rounded'>
+            <div className='col inter-heavy'>Protein: </div>
+            <div className='col inter-heavy'><div className='text-center macros-bubble rounded-pill background-color-pink'>{protein}g</div></div>
+          </div>
+        </div>
+        <div className='col color-black background-light-grey rounded macros'>
+          <div className='row mt-3 p-3'>
+            <div className='col inter-heavy'>Carbs: </div>
+            <div className='col inter-heavy text-end'><div className='text-center macros-bubble rounded-pill background-color-light-yellow'>{carbs}g</div></div>
+          </div>
+        </div>
+        <div className='col color-black background-light-grey rounded macros'>
+          <div className='row mt-3 p-3'>
+            <div className='col inter-heavy'>Fats: </div>
+            <div className='col inter-heavy text-end'><div className='text-center macros-bubble rounded-pill background-color-light-blue'>{fat}g</div></div>
           </div>
         </div>
 

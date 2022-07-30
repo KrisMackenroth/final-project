@@ -30,7 +30,6 @@ export default class MacrosPage extends React.Component {
             </div>
 
           </nav>
-
           <div className='container-fluid background-dark-blue'>
             <div className='col'>
               <div>

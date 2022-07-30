@@ -95,13 +95,6 @@ ul {
   background-color: white !important;
 }
 
-.macros {
-  background-color: white;
-  margin-left: 20%;
-  margin-right: 20%;
-  color: black;
-}
-
 .row-macro {
   background-color: white;
   margin: auto !important;
@@ -132,4 +125,26 @@ ul {
     width: 30% !important;
     margin: auto;
   }
+}
+
+.white-line {
+  border-bottom: solid rgba(255, 255, 255, 0.432);
+  border-bottom-width: 0.1px;
+}
+
+.macros-bubble {
+  width: 50%;
+  margin: auto;
+}
+
+.background-color-pink {
+  background-color: #ff4069;
+}
+
+.background-color-light-yellow {
+  background-color: #ffcd56;
+}
+
+.background-color-light-blue {
+  background-color: #36a2eb;
 }
