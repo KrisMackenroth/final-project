@@ -86,7 +86,9 @@ export default class ExercisesPage extends React.Component {
               </div>
               <div className='row'>
                 <div className='col color-white text-center'>Name</div>
-                <div className='col'></div>
+                <div className='col text-center'>
+                  <button onClick={this.handleClick} type="button" className="btn btn-warning btn-sm background-color-yellow ms-2">Add</button>
+                </div>
               </div>
               <div className='test row'>
               </div>
