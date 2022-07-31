@@ -100,23 +100,6 @@ export default class MacroForm extends React.Component {
           </div>
         </div>
         <h1 className='color-white text-center'>Macros</h1>
-        {/* <div className='row mb-4 row-macro'>
-          <div className='col color-white text-center macros rounded-pill'><span>BMR: </span>: <span>{bmr} Calories</span>
-          </div>
-        </div>
-
-        <div className='row mb-4 row-macro'>
-          <div className='col color-white text-center macros rounded-pill'><span>Protein</span>: <span>{protein} Grams</span>
-          </div>
-        </div>
-        <div className='row mb-4 row-macro'>
-          <div className='col color-white text-center macros rounded-pill'><span>Carbs</span>: <span>{carbs} Grams</span>
-          </div>
-        </div>
-        <div className='row mb-4 row-macro'>
-          <div className='col color-white text-center macros rounded-pill'><span>Fats</span>: <span>{fat} Grams</span>
-          </div>
-        </div> */}
         <div className='col color-black background-light-grey rounded macros'>
           <div className='row mt-3 p-3 rounded'>
             <div className='col inter-heavy'>BMR: </div>
