@@ -1,12 +1,12 @@
 import React from 'react';
-import PersonalForm from '../components/personal-form';
 import AppContext from '../lib/app-context';
 import TemporaryDrawer from '../components/navbar';
+import EditForm from '../components/Edit-form';
 
-export default class PersonalInfo extends React.Component {
+export default class InfoEdit extends React.Component {
 
   render() {
-    const personalForm = <PersonalForm />;
+
     const best = <TemporaryDrawer />;
     return (
       <React.Fragment>
@@ -21,17 +21,17 @@ export default class PersonalInfo extends React.Component {
 
         </nav>
         <div className='container-fluid background-dark-blue'>
-      <div className='col'>
-      <div className="row pt-5 align-items-center">
-        <div className="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-xl-4 offset-xl-4">
-            { personalForm }
-        </div>
-      </div>
+          <div className='col'>
+            <div className="row pt-5 align-items-center">
+              <div className="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-xl-4 offset-xl-4">
+                <EditForm/>
+              </div>
+            </div>
 
-    </div>
-      </div>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
 }
-PersonalInfo.contextType = AppContext;
+InfoEdit.contextType = AppContext;

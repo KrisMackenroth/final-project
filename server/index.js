@@ -160,6 +160,50 @@ returning *;
     .catch(err => next(err));
 });
 
+app.delete('/api/info', (req, res, next) => {
+  const { userId } = req.user;
+  const sql = `
+    delete from "accountInfo"
+ where "userId" = $1
+returning *;
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      const sql = `
+    delete from "users"
+ where "userId" = $1
+returning *;
+  `;
+      db.query(sql, params)
+        .then(result => {
+          res.status(201).json();
+        });
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/workouts', (req, res, next) => {
+  const { userId } = req.user;
+  const { name, muscleGroup } = req.body;
+
+  if (!name || !muscleGroup) {
+    throw new ClientError(400, 'All info must be entered properly');
+  }
+  const sql = `
+    insert into "workouts" ("userId", "name", "muscleGroup")
+    values ($1, $2, $3)
+    returning *
+  `;
+  const params = [userId, name, muscleGroup];
+  db.query(sql, params)
+    .then(result => {
+      const [info] = result.rows;
+      res.status(201).json(info);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
