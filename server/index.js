@@ -183,6 +183,25 @@ returning *;
     .catch(err => next(err));
 });
 
+app.post('/api/exercises', (req, res, next) => {
+  const { name, muscleGroup } = req.body;
+  if (!name || !muscleGroup) {
+    throw new ClientError(400, 'All info must be entered properly');
+  }
+  const sql = `
+    insert into "exercises" ("name", "muscleGroup")
+    values ($1, $2)
+    returning *
+  `;
+  const params = [name, muscleGroup];
+  db.query(sql, params)
+    .then(result => {
+      const [info] = result.rows;
+      res.status(201).json(info);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/workouts', (req, res, next) => {
   const { userId } = req.user;
   const { name, muscleGroup } = req.body;

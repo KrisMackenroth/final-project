@@ -10,17 +10,53 @@ export default class ExercisesPage extends React.Component {
       loading: true,
       query: '',
       setQuery: '',
-      savedData: ''
+      savedData: '',
+      muscleGroup: '',
+      exerciseName: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ query: event.target.value });
-    if (event.target.value === '') {
-      this.setState({ todos: this.state.savedData });
+    if (event.target.classList.contains('search')) {
+      this.setState({ query: event.target.value });
+      if (event.target.value === '') {
+        this.setState({ todos: this.state.savedData });
+      }
+    } else {
+      const { name, value } = event.target;
+      this.setState({ [name]: value });
+      fetch('/api/exercises')
+        .then(response => response.json())
+        .then(data => {
+          this.setState({ savedData: data });
+          this.setState({ todos: data });
+          this.setState({ loading: false });
+        }
+        );
     }
+
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const token = window.localStorage.getItem('react-context-jwt');
+    const info = {
+      name: this.state.exerciseName,
+      muscleGroup: this.state.muscleGroup
+    };
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
+      },
+      body: JSON.stringify(info)
+    };
+    fetch('/api/exercises', req);
+    window.location.reload(false);
   }
 
   handleClick() {
@@ -62,6 +98,48 @@ export default class ExercisesPage extends React.Component {
     }
     return (
       <React.Fragment>
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">Exercise Info</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form onSubmit={this.handleSubmit}>
+              <div className="modal-body">
+                  <label htmlFor="exerciseName" className="form-label">
+                    Exercise Name
+                  </label>
+                  <input
+                    required
+                    autoFocus
+                    id="exerciseName"
+                    type="text"
+                    name="exerciseName"
+                    onChange={this.handleChange}
+                    placeholder="Name"
+                    className="form-control bg-light" />
+                  <label htmlFor="muscleGroup" className="form-label">
+                    Muscle Group
+                  </label>
+                  <input
+                    required
+                    autoFocus
+                    id="muscleGroup"
+                    type="text"
+                    name="muscleGroup"
+                    onChange={this.handleChange}
+                    placeholder="Muscle"
+                    className="form-control bg-light" />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" className="btn btn-warning color-white" data-bs-dismiss="modal">Add Exercise</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <nav className="navbar background-light-grey">
           <div className="container-fluid justify-content-center">
             <div className='col'>{best}</div>
@@ -87,7 +165,9 @@ export default class ExercisesPage extends React.Component {
               <div className='row'>
                 <div className='col color-white text-center'>Name</div>
                 <div className='col text-center'>
-                  <button onClick={this.handleClick} type="button" className="btn btn-warning btn-sm background-color-yellow ms-2">Add</button>
+                  <button type="button" className="btn btn-warning btn-sm background-color-yellow ms-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add
+                  </button>
                 </div>
               </div>
               <div className='test row'>

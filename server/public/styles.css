@@ -32,7 +32,7 @@ ul {
 }
 
 .color-white {
-  color: white;
+  color: white !important;
 }
 
 .inter {
