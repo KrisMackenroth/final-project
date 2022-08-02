@@ -17,6 +17,7 @@ export default class ExercisesPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   handleChange(event) {
@@ -37,10 +38,21 @@ export default class ExercisesPage extends React.Component {
         }
         );
     }
+  }
 
+  getData() {
+    fetch('/api/exercises')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ savedData: data });
+        this.setState({ todos: data });
+        this.setState({ loading: false });
+      }
+      );
   }
 
   handleSubmit(event) {
+    this.setState({ loading: true });
     event.preventDefault();
     const token = window.localStorage.getItem('react-context-jwt');
     const info = {
@@ -55,8 +67,11 @@ export default class ExercisesPage extends React.Component {
       },
       body: JSON.stringify(info)
     };
-    fetch('/api/exercises', req);
-    window.location.reload(false);
+    fetch('/api/exercises', req)
+      .then(res => res.json())
+      .then(result => {
+        this.getData();
+      });
   }
 
   handleClick() {
@@ -68,15 +83,7 @@ export default class ExercisesPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/exercises')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ savedData: data });
-        this.setState({ todos: data });
-        this.setState({ loading: false });
-
-      }
-      );
+    this.getData();
   }
 
   render() {

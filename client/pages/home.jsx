@@ -5,8 +5,9 @@ import AppContext from '../lib/app-context';
 import TemporaryDrawer from '../components/navbar';
 // import PersonalInfo from './personal-info';
 // import MacrosPage from './macros';
-import AuthPage from './auth';
+// import AuthPage from './auth';
 // import InfoEdit from './Info-edit';
+import WorkoutPage from './workout-page';
 
 export default class Home extends React.Component {
 
@@ -30,7 +31,7 @@ export default class Home extends React.Component {
         <div className='container-fluid background-dark-blue'>
       <div className='col'>
       <div>
-        < AuthPage/>
+        < WorkoutPage/>
       </div>
 
     </div>

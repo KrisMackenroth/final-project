@@ -223,6 +223,65 @@ app.post('/api/workouts', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/combined', (req, res, next) => {
+  const { workoutId, exerciseId } = req.body;
+
+  if (!workoutId || !exerciseId) {
+    throw new ClientError(400, 'All info must be entered properly');
+  }
+  const sql = `
+    insert into "combined" ("workoutId", "exerciseId")
+    values ($1, $2)
+    returning *
+  `;
+  const params = [workoutId, exerciseId];
+  db.query(sql, params)
+    .then(result => {
+      const [info] = result.rows;
+      res.status(201).json(info);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/workouts', (req, res, next) => {
+  const { userId } = req.user;
+  const sql = `
+    select *
+      from "workouts"
+     where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/combined', (req, res) => {
+  const { userId } = req.user;
+  const { workoutId } = req.body;
+  const sql = `
+    select *
+  from "exercises"
+  join "combined" using ("exerciseId")
+  join "workouts" using ("workoutId")
+   where "userId" = $1
+   and "workoutId" = $2;
+  `;
+  const params = [userId, workoutId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'an unexpected error occurred'
+      });
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

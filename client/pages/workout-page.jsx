@@ -1,8 +1,7 @@
 import React from 'react';
-import WorkoutList from '../components/workout-list';
-import TemporaryDrawer from '../components/navbar';
+// import WorkoutList from '../components/workout-list';
 
-export default class ExercisesPage extends React.Component {
+export default class WorkoutPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,8 +11,16 @@ export default class ExercisesPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/exercises')
-      .then(response => response.json())
+    const token = window.localStorage.getItem('react-context-jwt');
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': token
+      }
+    };
+    fetch('/api/workouts', req)
+      .then(res => res.json())
       .then(data => {
         this.setState({ todos: data });
         this.setState({ loading: false });
@@ -23,9 +30,18 @@ export default class ExercisesPage extends React.Component {
 
   render() {
     const listItems = this.state.todos.map(exercise =>
-      <WorkoutList key={exercise.workoutId} muscleGroup={exercise.muscleGroup} name={exercise.name} />
+
+<div key={exercise.workoutId} className='row text-center test align-items-center'>
+      <div className='col'>
+        <li key={exercise.workoutId}>{exercise.name}</li>
+        <p className='inter'>{exercise.muscleGroup}</p>
+      </div>
+      <div className='col'>
+        <button id={exercise.workoutId} type="button" className="btn btn-warning btn-sm background-color-yellow">View</button>
+      </div>
+    </div>
     );
-    const best = <TemporaryDrawer />;
+
     let items;
 
     if (this.state.loading) {
@@ -35,21 +51,11 @@ export default class ExercisesPage extends React.Component {
     }
     return (
       <React.Fragment>
-        <nav className="navbar background-light-grey">
-          <div className="container-fluid justify-content-center">
-            <div className='col'>{best}</div>
-            <div className='col text-center margin-0'>
-              <span className="mb-0 h1 karla-medium-italic fs-3">MyWorkout</span>
-            </div>
-            <div className='col'></div>
-          </div>
-
-        </nav>
 
         <div className='container-fluid background-dark-blue'>
           <div className='col'>
             <div>
-              <h1 className='color-white text-center mb-5 pt-4'>Exercises</h1>
+              <h1 className='color-white text-center mb-5 pt-4'>Workouts</h1>
               <div className="row">
                 <div className='col text-center d-flex justify-content-center mb-5'>
                   <label htmlFor="exampleFormControlInput1" className="form-label"></label>
