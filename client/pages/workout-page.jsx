@@ -1,4 +1,5 @@
 import React from 'react';
+import TemporaryDrawer from '../components/navbar';
 // import WorkoutList from '../components/workout-list';
 
 export default class WorkoutPage extends React.Component {
@@ -139,7 +140,7 @@ export default class WorkoutPage extends React.Component {
     );
 
     let items;
-
+    const best = <TemporaryDrawer />;
     if (this.state.loading) {
       items = <div className='text-center'>Loading</div>;
     } else {
@@ -147,6 +148,16 @@ export default class WorkoutPage extends React.Component {
     }
     return (
       <React.Fragment>
+        <nav className="navbar background-light-grey">
+          <div className="container-fluid justify-content-center">
+            <div className='col'>{best}</div>
+            <div className='col text-center margin-0'>
+              <span className="mb-0 h1 karla-medium-italic fs-3">MyWorkout</span>
+            </div>
+            <div className='col'></div>
+          </div>
+
+        </nav>
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
