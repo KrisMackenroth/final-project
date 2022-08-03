@@ -8,6 +8,7 @@ import ExercisesPage from './pages/exercises-page';
 import PersonalInfo from './pages/personal-info';
 import MacrosPage from './pages/macros';
 import InfoEdit from './pages/Info-edit';
+import WorkoutPage from './pages/workout-page';
 export default class App extends React.Component {
 
   constructor(props) {
@@ -73,6 +74,9 @@ export default class App extends React.Component {
     }
     if (path === 'info-edit') {
       return <InfoEdit />;
+    }
+    if (path === 'workout-page') {
+      return <WorkoutPage />;
     }
 
   }

@@ -32,7 +32,7 @@ ul {
 }
 
 .color-white {
-  color: white;
+  color: white !important;
 }
 
 .inter {
@@ -147,4 +147,30 @@ ul {
 
 .background-color-light-blue {
   background-color: #36a2eb;
+}
+
+.closed {
+  text-align: center;
+  height: 50px;
+  width: 150px;
+  background-color: lightgrey;
+  border: 2px solid black;
+  overflow-wrap: break-word;
+}
+
+.open {
+  text-align: center;
+  height: 50px;
+  width: 150px;
+  background-color: lightgrey;
+  border: 2px solid black;
+  overflow-wrap: break-word;
+}
+
+.visible {
+  height: 50px;
+  width: 150px;
+  border: 2px solid black;
+  overflow-wrap: break-word;
+  background-color: white;
 }

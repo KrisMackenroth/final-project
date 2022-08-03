@@ -151,7 +151,7 @@ export default class AuthForm extends React.Component {
               <div className='col temp'>
                 <div className="input-group mb-4">
                   <span className="input-group-text" id="basic-addon1">DoB</span>
-                  <input onChange={handleChange} name='birthday' type="text" className="form-control" placeholder="DD/MMM/YYYY" aria-label="Username" aria-describedby="basic-addon1"></input>
+                  <input onChange={handleChange} name='birthday' type="text" className="form-control" placeholder="MM/DD/YYYY" aria-label="Username" aria-describedby="basic-addon1"></input>
                 </div>
               </div>
             </div>
