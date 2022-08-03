@@ -258,12 +258,13 @@ app.get('/api/workouts', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/combined', (req, res) => {
+app.get('/api/combined/:workoutId', (req, res) => {
   const { userId } = req.user;
-  const { workoutId } = req.body;
+  const workoutId = Number(req.params.workoutId);
   const sql = `
-    select *
-  from "exercises"
+    select "e"."name" as "exercise",
+    "e"."exerciseId" as "id"
+  from "exercises" as "e"
   join "combined" using ("exerciseId")
   join "workouts" using ("workoutId")
    where "userId" = $1
