@@ -4,6 +4,7 @@ import AppContext from '../lib/app-context';
 
 import WorkoutPage from './workout-page';
 
+
 export default class Home extends React.Component {
 
   render() {
@@ -14,9 +15,10 @@ export default class Home extends React.Component {
 
       <div className='col'>
       <div>
-        < WorkoutPage/>
-      </div>
 
+        < WorkoutPage/>
+
+      </div>
     </div>
 
       </React.Fragment>
