@@ -28,7 +28,6 @@ export default class PersonalForm extends React.Component {
         this.setState({ weight: data[0].weight });
         this.setState({ height: data[0].height });
         this.setState({ birthday: data[0].birthday });
-        // this.setState({ loading: false });
       }
       );
   }
