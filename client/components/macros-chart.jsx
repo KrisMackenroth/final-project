@@ -1,5 +1,6 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
+import CalculateAge from './age';
 
 import { Doughnut } from 'react-chartjs-2';
 Chart.register();
@@ -36,21 +37,7 @@ export default class MacroForm extends React.Component {
   }
 
   render() {
-    const splity = this.state.birthday.split('-');
-    const parsed = parseInt(splity[0]);
-    const birthMonth = parseInt(splity[1]);
-    const newDate = new Date();
-    const stringDate = JSON.stringify(newDate);
-    const splitDate = stringDate.split('-');
-    const almost = splitDate[0].replace("'", '');
-    const nearly = almost.replace('"', '');
-    const currentMonth = parseInt(splitDate[1]);
-    const month = currentMonth - birthMonth;
-    const done = parseInt(nearly);
-    let fullAge;
-    if (Math.sign(month) === -1) {
-      fullAge = done - parsed - 1;
-    } else { fullAge = done - parsed; }
+    const fullAge = <CalculateAge birthday={this.state.birthday}/>;
     const kg = this.state.weight * 0.45359237;
     const cm = this.state.height * 2.54;
     let bmr;
