@@ -1,6 +1,6 @@
 
 function CalculateAge(props) {
-  const splity = props.birthday.split('-');
+  const splity = props.split('-');
   const parsed = parseInt(splity[0]);
   const birthMonth = parseInt(splity[1]);
   const newDate = new Date();

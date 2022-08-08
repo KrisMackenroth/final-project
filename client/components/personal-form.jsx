@@ -52,7 +52,7 @@ export default class PersonalForm extends React.Component {
   }
 
   render() {
-    const fullAge = <CalculateAge birthday={this.state.birthday} />;
+    const fullAge = CalculateAge(this.state.birthday);
     return (
       <React.Fragment>
         <h1 className='text-center color-white mb-5'>My Profile</h1>

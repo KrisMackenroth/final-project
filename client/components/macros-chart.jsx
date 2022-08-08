@@ -37,7 +37,7 @@ export default class MacroForm extends React.Component {
   }
 
   render() {
-    const fullAge = <CalculateAge birthday={this.state.birthday}/>;
+    const fullAge = CalculateAge(this.state.birthday);
     const kg = this.state.weight * 0.45359237;
     const cm = this.state.height * 2.54;
     let bmr;
