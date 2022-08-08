@@ -13,7 +13,8 @@ export default class WorkoutPage extends React.Component {
       workoutName: '',
       view: 'hidden',
       allExercises: [],
-      chosenExercise: ''
+      chosenExercise: '',
+      chosenWorkout: 0
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +29,32 @@ export default class WorkoutPage extends React.Component {
   }
 
   handleClick(event) {
+    for (let x = 0; x < this.state.todos.length; x++) {
+      if (parseInt(event.target.id) === this.state.todos[x].workoutId) {
+        this.setState({ chosenWorkout: parseInt(event.target.id) });
+      }
+    }
+
+    if (event.target.classList.contains('exercise-submit')) {
+      for (let x = 0; x < this.state.allExercises.length; x++) {
+        if (this.state.chosenExercise === this.state.allExercises[x].name) {
+          const token = window.localStorage.getItem('react-context-jwt');
+          const info = {
+            workoutId: this.state.chosenWorkout,
+            exerciseId: this.state.allExercises[x].exerciseId
+          };
+          const req = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Access-Token': token
+            },
+            body: JSON.stringify(info)
+          };
+          fetch('/api/combined', req);
+        }
+      }
+    }
     if (event.target.classList.contains('add-exercise')) {
       this.setState({ view: 'visible' });
     } else {
@@ -51,10 +78,6 @@ export default class WorkoutPage extends React.Component {
   }
 
   handleSubmit(event) {
-    // if (event.target.classList.contains('exerciseSubmit')) {
-
-    // } else {
-
     this.setState({ loading: true });
     event.preventDefault();
     const token = window.localStorage.getItem('react-context-jwt');
@@ -75,6 +98,7 @@ export default class WorkoutPage extends React.Component {
       .then(result => {
         this.getData();
       });
+
   }
 
   getExercises() {
@@ -171,14 +195,14 @@ export default class WorkoutPage extends React.Component {
               <div className='row'>
         <div className={this.state.view}>
           <div className='col'>
-                    <form className='exerciseSubmit' onSubmit={this.handleSubmit}>
+                    <div>
                   <label htmlFor="Exercises">Choose an Exercise</label>
                       <select name="chosenExercise" id="exercises"
                         onChange={this.handleChange}>
                     {all}
                   </select>
-                    <input type="submit" value="Submit"></input>
-                    </form>
+                      <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise exercise-submit">Submit</button>
+                    </div>
                 </div>
         </div>
               </div>

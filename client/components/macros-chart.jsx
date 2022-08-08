@@ -31,7 +31,6 @@ export default class MacroForm extends React.Component {
         this.setState({ weight: data[0].weight });
         this.setState({ height: data[0].height });
         this.setState({ birthday: data[0].birthday });
-        // this.setState({ loading: false });
       }
       );
   }
@@ -39,13 +38,19 @@ export default class MacroForm extends React.Component {
   render() {
     const splity = this.state.birthday.split('-');
     const parsed = parseInt(splity[0]);
+    const birthMonth = parseInt(splity[1]);
     const newDate = new Date();
     const stringDate = JSON.stringify(newDate);
     const splitDate = stringDate.split('-');
     const almost = splitDate[0].replace("'", '');
     const nearly = almost.replace('"', '');
+    const currentMonth = parseInt(splitDate[1]);
+    const month = currentMonth - birthMonth;
     const done = parseInt(nearly);
-    const fullAge = done - parsed;
+    let fullAge;
+    if (Math.sign(month) === -1) {
+      fullAge = done - parsed - 1;
+    } else { fullAge = done - parsed; }
     const kg = this.state.weight * 0.45359237;
     const cm = this.state.height * 2.54;
     let bmr;
