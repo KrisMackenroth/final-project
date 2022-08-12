@@ -7,9 +7,9 @@ export default class MacrosPage extends React.Component {
     const drawer = <TemporaryDrawer />;
 
     return (
-      <React.Fragment>
+
       <div>
-          <nav className="navbar background-light-grey">
+        <nav className="navbar background-light-grey sticky-top">
             <div className="container-fluid justify-content-center">
               <div className='col'>{drawer}</div>
               <div className='col text-center margin-0'>
@@ -29,7 +29,7 @@ export default class MacrosPage extends React.Component {
           </div>
 
       </div>
-      </React.Fragment>
+
     );
   }
 }

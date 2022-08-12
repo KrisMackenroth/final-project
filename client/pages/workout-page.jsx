@@ -29,6 +29,7 @@ export default class WorkoutPage extends React.Component {
   }
 
   handleClick(event) {
+
     for (let x = 0; x < this.state.todos.length; x++) {
       if (parseInt(event.target.id) === this.state.todos[x].workoutId) {
         this.setState({ chosenWorkout: parseInt(event.target.id) });
@@ -36,6 +37,7 @@ export default class WorkoutPage extends React.Component {
     }
 
     if (event.target.classList.contains('exercise-submit')) {
+
       for (let x = 0; x < this.state.allExercises.length; x++) {
         if (this.state.chosenExercise === this.state.allExercises[x].name) {
           const token = window.localStorage.getItem('react-context-jwt');
@@ -52,6 +54,7 @@ export default class WorkoutPage extends React.Component {
             body: JSON.stringify(info)
           };
           fetch('/api/combined', req);
+
         }
       }
     }
@@ -142,7 +145,7 @@ export default class WorkoutPage extends React.Component {
 
     const listItems = this.state.todos.map(exercise =>
 <div key={exercise.workoutId} className='row text-center test align-items-center'>
-      <div className='col'>
+        <div className='col'>
         <li key={exercise.workoutId}>{exercise.name}</li>
         <p className='inter'>{exercise.muscleGroup}</p>
       </div>
@@ -164,7 +167,7 @@ export default class WorkoutPage extends React.Component {
     );
 
     let items;
-    const best = <TemporaryDrawer />;
+    const drawer = <TemporaryDrawer />;
     if (this.state.loading) {
       items = <div className='text-center'>Loading</div>;
     } else {
@@ -172,9 +175,9 @@ export default class WorkoutPage extends React.Component {
     }
     return (
       <React.Fragment>
-        <nav className="navbar background-light-grey">
+        <nav className="navbar background-light-grey sticky-top">
           <div className="container-fluid justify-content-center">
-            <div className='col'>{best}</div>
+            <div className='col'>{drawer}</div>
             <div className='col text-center margin-0'>
               <span className="mb-0 h1 karla-medium-italic fs-3">MyWorkout</span>
             </div>
@@ -189,10 +192,10 @@ export default class WorkoutPage extends React.Component {
                 <h5 className="modal-title" id="exampleModalLabel">Exercises</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body list-unstyled">
                 {listExercises}
               </div>
-              <div className='row'>
+              <div className='row m-auto'>
         <div className={this.state.view}>
           <div className='col'>
                     <div>
@@ -201,7 +204,7 @@ export default class WorkoutPage extends React.Component {
                         onChange={this.handleChange}>
                     {all}
                   </select>
-                      <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise exercise-submit">Submit</button>
+                      <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise exercise-submit" data-bs-dismiss="modal">Submit</button>
                     </div>
                 </div>
         </div>
