@@ -14,7 +14,8 @@ export default class WorkoutPage extends React.Component {
       view: 'hidden',
       allExercises: [],
       chosenExercise: '',
-      chosenWorkout: 0
+      chosenWorkout: 0,
+      deleteView: 'hidden'
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,8 +37,28 @@ export default class WorkoutPage extends React.Component {
       }
     }
 
-    if (event.target.classList.contains('exercise-submit')) {
+    if (event.target.classList.contains('exercise-delete')) {
+      for (let x = 0; x < this.state.allExercises.length; x++) {
+        if (this.state.chosenExercise === this.state.allExercises[x].name) {
+          const token = window.localStorage.getItem('react-context-jwt');
+          const info = {
+            workoutId: this.state.chosenWorkout,
+            exerciseId: this.state.allExercises[x].exerciseId
+          };
+          const req = {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Access-Token': token
+            },
+            body: JSON.stringify(info)
+          };
+          fetch('/api/combined', req);
+        }
+      }
+    }
 
+    if (event.target.classList.contains('exercise-submit')) {
       for (let x = 0; x < this.state.allExercises.length; x++) {
         if (this.state.chosenExercise === this.state.allExercises[x].name) {
           const token = window.localStorage.getItem('react-context-jwt');
@@ -54,12 +75,13 @@ export default class WorkoutPage extends React.Component {
             body: JSON.stringify(info)
           };
           fetch('/api/combined', req);
-
         }
       }
     }
     if (event.target.classList.contains('add-exercise')) {
       this.setState({ view: 'visible' });
+    } else if (event.target.classList.contains('delete-exercise')) {
+      this.setState({ deleteView: 'visible' });
     } else {
       const token = window.localStorage.getItem('react-context-jwt');
       const req = {
@@ -208,9 +230,22 @@ export default class WorkoutPage extends React.Component {
                     </div>
                 </div>
         </div>
+                <div className={this.state.deleteView}>
+                  <div className='col'>
+                    <div>
+                      <label htmlFor="Exercises">Delete an Exercise</label>
+                      <select name="chosenExercise" id="exercises"
+                        onChange={this.handleChange}>
+                        {all}
+                      </select>
+                      <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise exercise-delete" data-bs-dismiss="modal">Delete</button>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="modal-footer">
                 <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise">Add Exercise</button>
+                <button onClick={this.handleClick} type="button" className="btn btn-warning color-white delete-exercise">Delete Exercise</button>
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
