@@ -147,7 +147,7 @@ export default class ExercisesPage extends React.Component {
             </div>
           </div>
         </div>
-        <nav className="navbar background-light-grey">
+        <nav className="navbar background-light-grey sticky-top">
           <div className="container-fluid justify-content-center">
             <div className='col'>{best}</div>
             <div className='col text-center margin-0'>

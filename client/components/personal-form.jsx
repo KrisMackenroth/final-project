@@ -1,4 +1,5 @@
 import React from 'react';
+import CalculateAge from './age';
 
 export default class PersonalForm extends React.Component {
   constructor(props) {
@@ -51,15 +52,7 @@ export default class PersonalForm extends React.Component {
   }
 
   render() {
-    const splity = this.state.birthday.split('-');
-    const parsed = parseInt(splity[0]);
-    const newDate = new Date();
-    const stringDate = JSON.stringify(newDate);
-    const splitDate = stringDate.split('-');
-    const almost = splitDate[0].replace("'", '');
-    const nearly = almost.replace('"', '');
-    const done = parseInt(nearly);
-    const fullAge = done - parsed;
+    const fullAge = CalculateAge(this.state.birthday);
     return (
       <React.Fragment>
         <h1 className='text-center color-white mb-5'>My Profile</h1>

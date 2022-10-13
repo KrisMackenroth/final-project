@@ -243,6 +243,28 @@ app.post('/api/combined', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/combined', (req, res, next) => {
+  const { workoutId, exerciseId } = req.body;
+
+  if (!workoutId || !exerciseId) {
+    throw new ClientError(400, 'All info must be entered properly');
+  }
+  const sql = `
+
+    delete from "combined"
+    where "workoutId" = $1
+    and "exerciseId" = $2
+    returning *
+  `;
+  const params = [workoutId, exerciseId];
+  db.query(sql, params)
+    .then(result => {
+      const [info] = result.rows;
+      res.status(201).json(info);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/workouts', (req, res, next) => {
   const { userId } = req.user;
   const sql = `

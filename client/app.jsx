@@ -9,11 +9,13 @@ import PersonalInfo from './pages/personal-info';
 import MacrosPage from './pages/macros';
 import InfoEdit from './pages/Info-edit';
 import WorkoutPage from './pages/workout-page';
+import NotFound from './pages/not-found';
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      test: 'test',
       user: null,
       isAuthorizing: true,
       route: parseRoute(window.location.hash),
@@ -78,7 +80,7 @@ export default class App extends React.Component {
     if (path === 'workout-page') {
       return <WorkoutPage />;
     }
-
+    return <NotFound />;
   }
 
   render() {

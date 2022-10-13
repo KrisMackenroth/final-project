@@ -32,7 +32,7 @@ export default class EditForm extends React.Component {
       body: JSON.stringify(this.state)
     };
     fetch('/api/info', req);
-    window.location.hash = '#personal-info';
+    window.location.hash = '#';
   }
 
   render() {

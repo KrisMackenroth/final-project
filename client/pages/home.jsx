@@ -1,7 +1,7 @@
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
-import PersonalInfo from './personal-info';
+import ExercisesPage from './exercises-page';
 
 export default class Home extends React.Component {
 
@@ -13,7 +13,7 @@ export default class Home extends React.Component {
 
       <div className='col'>
       <div>
-        < PersonalInfo/>
+        < ExercisesPage/>
       </div>
     </div>
 

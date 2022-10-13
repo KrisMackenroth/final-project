@@ -13,7 +13,9 @@ export default class WorkoutPage extends React.Component {
       workoutName: '',
       view: 'hidden',
       allExercises: [],
-      chosenExercise: ''
+      chosenExercise: '',
+      chosenWorkout: 0,
+      deleteView: 'hidden'
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,8 +30,58 @@ export default class WorkoutPage extends React.Component {
   }
 
   handleClick(event) {
+
+    for (let x = 0; x < this.state.todos.length; x++) {
+      if (parseInt(event.target.id) === this.state.todos[x].workoutId) {
+        this.setState({ chosenWorkout: parseInt(event.target.id) });
+      }
+    }
+
+    if (event.target.classList.contains('exercise-delete')) {
+      for (let x = 0; x < this.state.allExercises.length; x++) {
+        if (this.state.chosenExercise === this.state.allExercises[x].name) {
+          const token = window.localStorage.getItem('react-context-jwt');
+          const info = {
+            workoutId: this.state.chosenWorkout,
+            exerciseId: this.state.allExercises[x].exerciseId
+          };
+          const req = {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Access-Token': token
+            },
+            body: JSON.stringify(info)
+          };
+          fetch('/api/combined', req);
+        }
+      }
+    }
+
+    if (event.target.classList.contains('exercise-submit')) {
+      for (let x = 0; x < this.state.allExercises.length; x++) {
+        if (this.state.chosenExercise === this.state.allExercises[x].name) {
+          const token = window.localStorage.getItem('react-context-jwt');
+          const info = {
+            workoutId: this.state.chosenWorkout,
+            exerciseId: this.state.allExercises[x].exerciseId
+          };
+          const req = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Access-Token': token
+            },
+            body: JSON.stringify(info)
+          };
+          fetch('/api/combined', req);
+        }
+      }
+    }
     if (event.target.classList.contains('add-exercise')) {
       this.setState({ view: 'visible' });
+    } else if (event.target.classList.contains('delete-exercise')) {
+      this.setState({ deleteView: 'visible' });
     } else {
       const token = window.localStorage.getItem('react-context-jwt');
       const req = {
@@ -51,10 +103,6 @@ export default class WorkoutPage extends React.Component {
   }
 
   handleSubmit(event) {
-    // if (event.target.classList.contains('exerciseSubmit')) {
-
-    // } else {
-
     this.setState({ loading: true });
     event.preventDefault();
     const token = window.localStorage.getItem('react-context-jwt');
@@ -75,6 +123,7 @@ export default class WorkoutPage extends React.Component {
       .then(result => {
         this.getData();
       });
+
   }
 
   getExercises() {
@@ -118,7 +167,7 @@ export default class WorkoutPage extends React.Component {
 
     const listItems = this.state.todos.map(exercise =>
 <div key={exercise.workoutId} className='row text-center test align-items-center'>
-      <div className='col'>
+        <div className='col'>
         <li key={exercise.workoutId}>{exercise.name}</li>
         <p className='inter'>{exercise.muscleGroup}</p>
       </div>
@@ -140,7 +189,7 @@ export default class WorkoutPage extends React.Component {
     );
 
     let items;
-    const best = <TemporaryDrawer />;
+    const drawer = <TemporaryDrawer />;
     if (this.state.loading) {
       items = <div className='text-center'>Loading</div>;
     } else {
@@ -148,9 +197,9 @@ export default class WorkoutPage extends React.Component {
     }
     return (
       <React.Fragment>
-        <nav className="navbar background-light-grey">
+        <nav className="navbar background-light-grey sticky-top">
           <div className="container-fluid justify-content-center">
-            <div className='col'>{best}</div>
+            <div className='col'>{drawer}</div>
             <div className='col text-center margin-0'>
               <span className="mb-0 h1 karla-medium-italic fs-3">MyWorkout</span>
             </div>
@@ -165,25 +214,38 @@ export default class WorkoutPage extends React.Component {
                 <h5 className="modal-title" id="exampleModalLabel">Exercises</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body list-unstyled">
                 {listExercises}
               </div>
-              <div className='row'>
+              <div className='row m-auto'>
         <div className={this.state.view}>
           <div className='col'>
-                    <form className='exerciseSubmit' onSubmit={this.handleSubmit}>
+                    <div>
                   <label htmlFor="Exercises">Choose an Exercise</label>
                       <select name="chosenExercise" id="exercises"
                         onChange={this.handleChange}>
                     {all}
                   </select>
-                    <input type="submit" value="Submit"></input>
-                    </form>
+                      <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise exercise-submit" data-bs-dismiss="modal">Submit</button>
+                    </div>
                 </div>
         </div>
+                <div className={this.state.deleteView}>
+                  <div className='col'>
+                    <div>
+                      <label htmlFor="Exercises">Delete an Exercise</label>
+                      <select name="chosenExercise" id="exercises"
+                        onChange={this.handleChange}>
+                        {all}
+                      </select>
+                      <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise exercise-delete" data-bs-dismiss="modal">Delete</button>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="modal-footer">
                 <button onClick={this.handleClick} type="button" className="btn btn-warning color-white add-exercise">Add Exercise</button>
+                <button onClick={this.handleClick} type="button" className="btn btn-warning color-white delete-exercise">Delete Exercise</button>
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>

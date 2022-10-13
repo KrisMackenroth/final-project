@@ -7,12 +7,12 @@ export default class PersonalInfo extends React.Component {
 
   render() {
     const personalForm = <PersonalForm />;
-    const best = <TemporaryDrawer />;
+    const drawer = <TemporaryDrawer />;
     return (
       <React.Fragment>
         <nav className="navbar background-light-grey">
           <div className="container-fluid justify-content-center">
-            <div className='col'>{best}</div>
+            <div className='col'>{drawer}</div>
             <div className='col text-center margin-0'>
               <span className="mb-0 h1 karla-medium-italic fs-3">MyWorkout</span>
             </div>
